@@ -14,22 +14,42 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
 
-      - name: Set up Java
+      - name: Set up Java / JDK
         uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
           java-version: '17'
 
-      - name: Install Dependencies
+      - name: Prepare Web Directory
+        run: |
+          mkdir -p www assets
+          cp index.html manifest.json www/ 2>/dev/null || true
+
+      - name: Install Dependencies & Capacitor Assets Tool
         run: |
           npm install
+          npm install -D @capacitor/assets
 
-      - name: Initialize & Sync Capacitor
+      - name: Initialize & Configure Capacitor Android
         run: |
-          npm run cap:add-android || true
-          npm run cap:sync
+          npx cap add android || true
+          npx cap copy android
+
+      - name: Set Android Target SDK to 34 (Android 14+)
+        run: |
+          if [ -f android/app/build.gradle ]; then
+            sed -i 's/targetSdkVersion .*/targetSdkVersion 34/' android/app/build.gradle
+            sed -i 's/compileSdkVersion .*/compileSdkVersion 34/' android/app/build.gradle
+          fi
+
+      - name: Generate App Assets & Sync
+        run: |
+          if [ -f assets/icon.png ]; then
+            npx capacitor-assets generate --android
+          fi
+          npx cap sync android
 
       - name: Build APK with Gradle
         run: |
