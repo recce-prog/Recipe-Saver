@@ -1,21 +1,16 @@
 {
-"name": "MacroCraft Recipe Studio",
-"short_name": "MacroCraft",
-"start_url": "./index.html",
-"display": "standalone",
-"background_color": "#F8F6F0",
-"theme_color": "#2D4A3E",
-"orientation": "portrait",
-"icons": [
-{
-"src": "icon-192.png",
-"sizes": "192x192",
-"type": "image/png"
-},
-{
-"src": "icon-512.png",
-"sizes": "512x512",
-"type": "image/png"
-}
-]
+  "short_name": "Recipe Book",
+  "name": "Recipe Book - Macro & Ingredient Logger",
+  "icons": [
+    {
+      "src": "assets/icon.png",
+      "sizes": "192x192 512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "./index.html",
+  "background_color": "#f7f5f0",
+  "theme_color": "#8c6d53",
+  "display": "standalone"
 }
