@@ -24,7 +24,7 @@ jobs:
 
       - name: Prepare Web Directory
         run: |
-          mkdir -p www
+          mkdir -p www assets
           cp index.html manifest.json www/ 2>/dev/null || true
 
       - name: Install Dependencies & Capacitor Assets
@@ -46,7 +46,7 @@ jobs:
       - name: Generate Custom Icons & Sync
         run: |
           if [ -f assets/icon-only.png ]; then
-            npx @capacitor/assets generate --android --iconPath assets/icon-only.png
+            npx @capacitor/assets generate --android --icon assets/icon-only.png
           fi
           npx cap sync android
 
