@@ -24,30 +24,29 @@ jobs:
 
       - name: Prepare Web Directory
         run: |
-          mkdir -p www assets
+          mkdir -p www
           cp index.html manifest.json www/ 2>/dev/null || true
 
-      - name: Install Dependencies & Capacitor Assets Tool
+      - name: Install Dependencies
         run: |
           npm install
-          npm install -D @capacitor/assets
+          npm install -D @capacitor/assets  # <--- MUST INSTALL THIS TOOL
 
-      - name: Initialize & Configure Capacitor Android
+      - name: Add Android Platform
         run: |
           npx cap add android || true
-          npx cap copy android
 
-      - name: Set Android Target SDK to 34 (Android 14+)
+      - name: Set Android Target SDK to 34 (Android 14)
         run: |
           if [ -f android/app/build.gradle ]; then
             sed -i 's/targetSdkVersion .*/targetSdkVersion 34/' android/app/build.gradle
             sed -i 's/compileSdkVersion .*/compileSdkVersion 34/' android/app/build.gradle
           fi
 
-      - name: Generate App Assets & Sync
+      - name: Generate Custom Icons & Sync  # <--- MUST HAVE THIS STEP
         run: |
           if [ -f assets/icon.png ]; then
-            npx capacitor-assets generate --android
+            npx @capacitor/assets generate --android
           fi
           npx cap sync android
 
