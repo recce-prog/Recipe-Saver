@@ -46,7 +46,9 @@ jobs:
       - name: Generate Custom Icons & Sync
         run: |
           if [ -f assets/icon-only.png ]; then
-            npx @capacitor/assets generate --android --icon assets/icon-only.png
+            mkdir -p assets/logo
+            cp assets/icon-only.png assets/logo/icon.png
+            npx @capacitor/assets generate --android
           fi
           npx cap sync android
 
