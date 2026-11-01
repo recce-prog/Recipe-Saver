@@ -1,0 +1,14 @@
+{
+"appId": "com.macrocraft.recipestudio",
+"appName": "MacroCraft",
+"webDir": "www",
+"bundledWebRuntime": false,
+"server": {
+"androidScheme": "https"
+},
+"android": {
+"allowMixedContent": true,
+"captureInput": true,
+"backgroundColor": "#F8F6F0"
+}
+}
