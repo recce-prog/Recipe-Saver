@@ -1,0 +1,15 @@
+Node Modules
+
+node_modules/
+
+Capacitor & Android Local Build Directories
+
+www/
+android/app/build/
+android/.gradle/
+android/local.properties
+
+System Files
+
+.DS_Store
+Thumbs.db
